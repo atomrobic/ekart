@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { HeartOutlined, HeartFilled, ShoppingCartOutlined, PauseOutlined, CaretRightOutlined } from "@ant-design/icons";
 import { Card, Badge, Button, Rate, Tag } from "antd";
-
+import { useNavigate } from "react-router-dom";
+import LoadingMask from "./LoadingBar";
 const { Meta } = Card;
 
 const ProductCard = ({ product, isWishlisted, onWishlistToggle }) => {
   const [imageIndex, setImageIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+
   const [isHovered, setIsHovered] = useState(false);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
   const [showControls, setShowControls] = useState(false);
+  const navigate = useNavigate();
 
   // Handle auto-scroll
   useEffect(() => {
@@ -26,6 +30,10 @@ const ProductCard = ({ product, isWishlisted, onWishlistToggle }) => {
     setShowControls(true);
   };
 
+ const handleCardClicks = () => {
+navigate(`/seller/products/${product.id}`);
+};
+
   const handleManualChange = (direction) => {
     setImageIndex(prev => {
       if (direction === 'next') {
@@ -42,6 +50,8 @@ const ProductCard = ({ product, isWishlisted, onWishlistToggle }) => {
 
   return (
     <div className="relative group">
+      {loading && <LoadingMask fixed={true} />}
+
       {/* Unique Floating Card Design */}
       <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-black rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02] border border-slate-700/50">
         
@@ -226,16 +236,34 @@ const ProductCard = ({ product, isWishlisted, onWishlistToggle }) => {
             </div>
           )}
           
-          {/* Compact Add to Cart Button */}
-          <Button 
-            type="primary" 
-            block 
-            size="small"
-            className="bg-gradient-to-r from-yellow-500 to-amber-500 border-0 font-semibold h-8 hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl text-xs"
-            onClick={(e) => e.stopPropagation()}
-          >
-            Add to Cart
-          </Button>
+          {/* Add to Cart and View Buttons */}
+          <div className="flex gap-2">
+            <Button 
+              type="primary" 
+              block 
+              size="small"
+              className="bg-gradient-to-r from-yellow-500 to-amber-500 border-0 font-semibold h-8 hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl text-xs"
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent card click navigation
+                console.log("Added to cart:", product);
+              }}
+            >
+              Add to Cart
+            </Button>
+
+            <Button 
+              type="default"
+              block
+              size="small"
+              className="bg-gray-800 hover:bg-gray-700 text-white border-0 font-semibold h-8 transition-all duration-300 rounded-xl shadow-lg text-xs"
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent card click navigation
+                handleCardClicks(); // Navigate to product details
+              }}
+            >
+              View
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -247,7 +275,7 @@ const ProductCard = ({ product, isWishlisted, onWishlistToggle }) => {
   );
 };
 
-// Custom Icons (keeping your existing ones)
+// Custom Icons
 const StarFilled = ({ className }) => (
   <svg 
     className={className} 

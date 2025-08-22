@@ -9,7 +9,7 @@ const useProductStore = create((set, get) => ({
   // Fetch all products
   fetchProducts: async () => {
     try {
-      const response = await axios.get("https://ecom-new-4bgv.onrender.com/seller/products");
+      const response = await axios.get("https://ecomnew-atomrobic7620-zc1loemy.leapcell.dev/seller/products");
       set({ products: response.data });
     } catch (error) {
       console.error("Failed to fetch products", error);
@@ -30,7 +30,7 @@ const useProductStore = create((set, get) => ({
   // Fetch single product by ID
   handleQuickView: async (id) => {
     try {
-      const response = await axios.get(`https://ecom-new-4bgv.onrender.com/seller/products?id=${id}`);
+      const response = await axios.get(`https://ecomnew-atomrobic7620-zc1loemy.leapcell.dev/products/${id}`);
       const product = Array.isArray(response.data) ? response.data[0] : response.data;
       if (product) {
         set({ selectedProduct: product });

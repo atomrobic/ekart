@@ -22,7 +22,7 @@ const ProductGrid = ({ wishlist, onWishlistToggle }) => {
   // Fetch categories - replace with your HTTP client
   useEffect(() => {
     // Replace with your existing HTTP client or fetch API
-    fetch("http://127.0.0.1:8000/seller/categories")
+    fetch("https://ecomnew-atomrobic7620-zc1loemy.leapcell.dev/seller/categories")
       .then(res => res.json())
       .then((data) => setCategories(data))
       .catch((err) => console.error(err));
