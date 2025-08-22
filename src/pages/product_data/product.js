@@ -30,7 +30,7 @@ const useProductStore = create((set, get) => ({
   // Fetch single product by ID
   handleQuickView: async (id) => {
     try {
-      const response = await axios.get(`https://ecom-new-4bgv.onrender.com/seller/products?id=${id}`);
+      const response = await axios.get(`https://ecom-new-4bgv.onrender.com/products/${id}`);
       const product = Array.isArray(response.data) ? response.data[0] : response.data;
       if (product) {
         set({ selectedProduct: product });

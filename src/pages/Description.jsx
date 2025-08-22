@@ -15,7 +15,7 @@ const Description = () => {
  useEffect(() => {
   const fetchProduct = async () => {
     try {
-      const response = await axios.get(`https://ecom-new-4bgv.onrender.com/products/${id}`);
+      const response = await axios.get(`https://ecom-new-4bgv.onrender.com/seller/products/${id}`);
       console.log('Product fetched:', response.data); // For debugging
       setProduct(response.data);
     } catch (err) {
