@@ -11,8 +11,8 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/home" element={<StyleHub />} />
-<Route path="/seller/products/:productId" element={<Description />} />
-        <Route path="/login" element={<Login />} />
+<Route path="/seller/products/:id" element={<Description />} />     
+   <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<LandingPage />} /> {/* Default route */}
 
