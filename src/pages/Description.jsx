@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Plus, Minus, Heart, Share2, Star, Truck, RotateCcw, Shield } from 'lucide-react';
 import Navbar from './navbar';
 import WhatsAppButton from './product_data/whatsapp';
-
+import axios from 'axios';
 const Description = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -12,15 +12,15 @@ const Description = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageArray, setImageArray] = useState([]);
   const [quantity, setQuantity] = useState(1);
-useEffect(() => {
+ useEffect(() => {
   const fetchProduct = async () => {
     try {
-      const response = await fetch(`https://ecom-new-4bgv.onrender.com/seller/products/${id}/`);
-      if (!response.ok) throw new Error('Failed to fetch product');
-      const data = await response.json();
-      setProduct(data);
+      const response = await axios.get(`https://ecom-new-4bgv.onrender.com/products/${id}`);
+      console.log('Product fetched:', response.data); // For debugging
+      setProduct(response.data);
     } catch (err) {
-      setError(err.message);
+      console.log('Error fetching product:', err);
+      setError(err.message || 'Error fetching product');
     } finally {
       setLoading(false);
     }
