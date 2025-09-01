@@ -39,7 +39,7 @@ export default function Register() {
     setEmail(formData.email);
 
     try {
-      const res = await fetch("https://ecom-new-4bgv.onrender.com/signup", {
+      const res = await fetch("https://ecomnew-atomrobic7620-zc1loemy.leapcell.dev/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -50,7 +50,7 @@ export default function Register() {
         throw new Error(err.detail);
       }
 
-      const otpRes = await fetch(`https://ecom-new-4bgv.onrender.com/send-otp?email=${formData.email}`, {
+      const otpRes = await fetch(`https://ecomnew-atomrobic7620-zc1loemy.leapcell.dev/send-otp?email=${formData.email}`, {
         method: "POST",
       });
 
@@ -74,7 +74,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`https://ecom-new-4bgv.onrender.com/verify-otp?email=${email}&otp=${otp}`);
+      const response = await axios.post(`https://ecomnew-atomrobic7620-zc1loemy.leapcell.dev/verify-otp?email=${email}&otp=${otp}`);
       const data = response.data;
 
       if (response.status === 200) {

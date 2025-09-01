@@ -7,7 +7,7 @@ const useProductStore = create((set) => ({
 
   fetchProducts: async ({ sortBy, categoryId = "" } = {}) => {
     try {
-      let url = `https://ecom-new-4bgv.onrender.com/seller/products`;
+      let url = `https://ecomnew-atomrobic7620-zc1loemy.leapcell.dev/seller/products`;
       const params = [];
 
       if (sortBy) params.push(`sort_by=${sortBy}`);
